@@ -1,0 +1,131 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace General_Quiz_Application
+{
+    public partial class Form1 : Form
+    {
+        // quiz game variables
+        int correctAnswer;
+        int questionNumber = 1;
+        int score;
+        int percentage;
+        int totalQuestions;
+        public Form1()
+        {
+            InitializeComponent();
+            askQuestion(questionNumber);
+            totalQuestions = 8;
+        }
+        private void checkAnswerEvent(object sender, EventArgs e)
+        {
+            var senderObject = (Button)sender;
+            int buttonTag = Convert.ToInt32(senderObject.Tag);
+            if (buttonTag == correctAnswer)
+            {
+                score++;
+            }
+            if (questionNumber == totalQuestions)
+            {
+                // work out the percentage
+                percentage = (int)Math.Round((double)(score * 100) / totalQuestions);
+                MessageBox.Show(
+                    "Quiz Ended!" + Environment.NewLine +
+                    "You have answered " + score + " questions correctly." + Environment.NewLine +
+                    "Your total percentage is " + percentage + "%" + Environment.NewLine +
+                    "Click OK to play again"
+                    );
+                score = 0;
+                questionNumber = 0;
+                askQuestion(questionNumber);
+            }
+            questionNumber++;
+            askQuestion(questionNumber);
+        }
+        private void askQuestion(int qnum)
+        {
+            switch (qnum)
+            {
+                case 1:
+                    pictureBox1.Image = Properties.Resources.paris;
+                    lblQuestion.Text = "What is the capital of France?";
+                    button1.Text = "London";
+                    button2.Text = "Berlin";
+                    button3.Text = "Paris";
+                    button4.Text = "Madrid";
+                    correctAnswer = 3;
+                    break;
+                case 2:
+                    pictureBox1.Image = Properties.Resources.Q61;
+                    lblQuestion.Text = "Which Pakistani cricketer has the nickname Rawalpindi Express?";
+                    button1.Text = "Shahid Afridi";
+                    button2.Text = "Babar Azam";
+                    button3.Text = "Shoaib Akhtar";
+                    button4.Text = "Wasim Akram";
+                    correctAnswer = 3;
+                    break;
+                case 3:
+                    pictureBox1.Image = Properties.Resources.solarsystem;
+                    lblQuestion.Text = "Which is the largest Planet of our Solar System?";
+                    button1.Text = "Mercury";
+                    button2.Text = "Jupiter";
+                    button3.Text = "Mars";
+                    button4.Text = "Venus";
+                    correctAnswer = 2;
+                    break;
+                case 4:
+                    pictureBox1.Image = Properties.Resources.team;
+                    lblQuestion.Text = "Player of the match when Pakistan beat India by 10 wickets?";
+                    button1.Text = "Shaheen Shah Afridi";
+                    button2.Text = "Babar Azam";
+                    button3.Text = "Muhammad Rizwan";
+                    button4.Text = "Hasan Ali";
+                    correctAnswer = 1;
+                    break;
+                case 5:
+                    pictureBox1.Image = Properties.Resources.everest;
+                    lblQuestion.Text = "What is the highest mountain in the world?";
+                    button1.Text = "Mount Kilimanjaro";
+                    button2.Text = "Mount Everest";
+                    button3.Text = "K2";
+                    button4.Text = "Mount McKinley (Denali)";
+                    correctAnswer = 2;
+                    break;
+                case 6:
+                    pictureBox1.Image = Properties.Resources.programming;
+                    lblQuestion.Text = "Which of the following is a programming language?";
+                    button1.Text = "HTML";
+                    button2.Text = "JPEG";
+                    button3.Text = "XML";
+                    button4.Text = "Python";
+                    correctAnswer = 4;
+                    break;
+                case 7:
+                    pictureBox1.Image = Properties.Resources.Q3;
+                    lblQuestion.Text = "In which year did Pakistan win its first Cricket World Cup?";
+                    button1.Text = "2009";
+                    button2.Text = "2017";
+                    button3.Text = "1999";
+                    button4.Text = "1992";
+                    correctAnswer = 4;
+                    break;
+                case 8:
+                    pictureBox1.Image = Properties.Resources.babar;
+                    lblQuestion.Text = "In the 2021 T20 World Cup, who was Pakistan's leading run-scorer and played a crucial role in their success?";
+                    button1.Text = "Babar Azam";
+                    button2.Text = "Muhammad Rizwan";
+                    button3.Text = "Shadab Khan";
+                    button4.Text = "Fakhar Zaman";
+                    correctAnswer = 1;
+                    break;
+            }
+        }
+    }
+}
